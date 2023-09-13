@@ -45,3 +45,26 @@ IDS = {
     "SPACE": SPACE
 }
 
+PosTags = [
+    "NO_TAG",
+    "ADJ",
+    "ADP",
+    "ADV",
+    "AUX",
+    "CONJ",
+    "CCONJ",
+    "DET",
+    "INTJ",
+    "NOUN",
+    "NUM",
+    "PART",
+    "PRON",
+    "PROPN",
+    "PUNCT",
+    "SCONJ",
+    "SYM",
+    "VERB",
+    "X",
+    "EOL",
+    "SPACE",
+]
