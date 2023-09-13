@@ -106,7 +106,7 @@ def analyze_subtitle(subtitle_text, output_file_path):
 if __name__ == "__main__":
     # Directory path
     directory = "./srt"
-    outputDir = "./output"
+    outputDir = "./output/spacy"
 
     # Create the output directory if it doesn't exist
     if not os.path.exists(outputDir):
