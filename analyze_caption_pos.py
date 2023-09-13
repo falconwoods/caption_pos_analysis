@@ -2,6 +2,7 @@ import spacy
 from spacy.tokenizer import Tokenizer
 from spacy.util import compile_infix_regex
 import json
+import os
 
 # Load the spaCy model for the English language
 nlp = spacy.load("en_core_web_sm")
@@ -102,7 +103,28 @@ def analyze_subtitle(subtitle_text, output_file_path):
 
 
 if __name__ == "__main__":
-    subtitle_file_path = "input.srt"
-    subtitle_text = read_subtitle_file(subtitle_file_path)
-    output_file_path = "output.json"
-    analyze_subtitle(subtitle_text, output_file_path)
+    # Directory path
+    directory = "./srt"
+    outputDir = "./output"
+
+    # Create the output directory if it doesn't exist
+    if not os.path.exists(outputDir):
+        os.makedirs(outputDir)
+
+    # List to store .srt files
+    srt_files = []
+
+    # Iterate through files in the directory
+    for filename in os.listdir(directory):
+        if filename.endswith(".srt"):
+            srt_files.append(os.path.join(directory, filename))
+
+    # Now, srt_files contains the paths to all .srt files in the "./srt" directory
+    # You can iterate through them or perform other operations as needed
+    for srt_file in srt_files:
+        print(srt_file)
+        subtitle_text = read_subtitle_file(srt_file)
+        output_file_path = os.path.join(outputDir, os.path.basename(srt_file).replace('.srt', '.json'))
+        analyze_subtitle(subtitle_text, output_file_path)
+
+
