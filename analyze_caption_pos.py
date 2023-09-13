@@ -8,27 +8,27 @@ import os
 nlp = spacy.load("en_core_web_sm")
 
 PosTags = {
-    "NO_TAG": 0,
-    "ADJ": 1,
-    "ADP": 2,
-    "ADV": 3,
-    "AUX": 4,
-    "CONJ": 5,
+    "NO_TAG": 1,
+    "ADJ": 2,
+    "ADP": 3,
+    "ADV": 4,
+    "AUX": 5,
+    "CONJ": 6,
     "CCONJ": 6,
-    "DET": 7,
-    "INTJ": 8,
-    "NOUN": 9,
-    "NUM": 10,
-    "PART": 11,
-    "PRON": 12,
-    "PROPN": 13,
-    "PUNCT": 14,
-    "SCONJ": 15,
-    "SYM": 16,
-    "VERB": 17,
-    "X": 18,
-    "EOL": 19,
-    "SPACE": 20,
+    "DET": 8,
+    "INTJ": 9,
+    "NOUN": 10,
+    "NUM": 11,
+    "PART": 12,
+    "PRON": 13,
+    "PROPN": 14,
+    "PUNCT": 15,
+    "SCONJ": 16,
+    "SYM": 17,
+    "VERB": 18,
+    "X": 19,
+    "EOL": 20,
+    "SPACE": 21,
 }
 
 def custom_tokenizer(nlp):
@@ -93,7 +93,8 @@ def analyze_subtitle(subtitle_text, output_file_path):
             pos_tags = {}
             for token in sentence_doc:
                 pos_tags[token.idx] = PosTags[token.pos_]
-            print(line_number, [token.text for token in sentence_doc])
+            print(line_number, [f"{token.text}={pos_tags[token.idx]}" for token in sentence_doc])
+
             # result_data["pos"][line_number].append(pos_tags)
             result_data["pos"].append(pos_tags)
 
