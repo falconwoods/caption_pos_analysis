@@ -9,27 +9,28 @@ nlp = spacy.load("en_core_web_sm")
 
 PosTags = {
     "NO_TAG": 1,
-    "ADJ": 2,
-    "ADP": 3,
-    "ADV": 4,
-    "AUX": 5,
-    "CONJ": 6,
-    "CCONJ": 6,
-    "DET": 8,
-    "INTJ": 9,
-    "NOUN": 10,
-    "NUM": 11,
-    "PART": 12,
-    "PRON": 13,
-    "PROPN": 14,
-    "PUNCT": 15,
-    "SCONJ": 16,
-    "SYM": 17,
-    "VERB": 18,
-    "X": 19,
-    "EOL": 20,
-    "SPACE": 21,
+    "X": 2,
+    "PUNCT": 3,
+    "SYM": 4,
+    "EOL": 5,
+    "SPACE": 6,
+    "NOUN": 7,
+    "PROPN": 8,
+    "VERB": 9,
+    "AUX": 10,
+    "ADJ": 11,
+    "CONJ": 12,
+    "CCONJ": 13,
+    "SCONJ": 14,
+    "ADP": 15,
+    "ADV": 16,
+    "DET": 17,
+    "INTJ": 18,
+    "PART": 19,
+    "PRON": 20,
+    "NUM": 21,
 }
+
 
 def custom_tokenizer(nlp):
     # Define the infix pattern without hyphen to prevent splitting hyphenated words
@@ -93,7 +94,10 @@ def analyze_subtitle(subtitle_text, output_file_path):
             pos_tags = {}
             for token in sentence_doc:
                 pos_tags[token.idx] = PosTags[token.pos_]
-            print(line_number, [f"{token.text}={pos_tags[token.idx]}" for token in sentence_doc])
+            print(
+                line_number,
+                [f"{token.text}={pos_tags[token.idx]}" for token in sentence_doc],
+            )
 
             # result_data["pos"][line_number].append(pos_tags)
             result_data["pos"].append(pos_tags)
@@ -125,7 +129,7 @@ if __name__ == "__main__":
     for srt_file in srt_files:
         print(srt_file)
         subtitle_text = read_subtitle_file(srt_file)
-        output_file_path = os.path.join(outputDir, os.path.basename(srt_file).replace('.srt', '.json'))
+        output_file_path = os.path.join(
+            outputDir, os.path.basename(srt_file).replace(".srt", ".json")
+        )
         analyze_subtitle(subtitle_text, output_file_path)
-
-
